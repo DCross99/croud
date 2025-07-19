@@ -22,6 +22,14 @@ dev = [
     "ruff>=0.12.0",
 ]
 
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+pythonpath = [
+  "."
+]
+
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
