@@ -1,10 +1,15 @@
-from fastapi import APIRouter, responses, Request
+from fastapi import APIRouter, responses, Request, HTTPException
 
-from service.models.api import Feature
+from service.models.api import Payload
+from service.logic.youtube import youtube
 
 router = APIRouter()
 
 
-@router.post("/feature")
-def feature(request: Request, payload: Feature) -> responses.JSONResponse:
-    return responses.JSONResponse(status_code=200, content=payload.data)
+@router.post("/scraper")
+def scraper(request: Request, payload: Payload) -> responses.PlainTextResponse:
+    match payload.domain:
+        case "youtube":
+            return youtube(payload.url)
+        case _:
+            raise HTTPException(status_code=404, detail="Item not found")

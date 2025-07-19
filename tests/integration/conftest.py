@@ -6,10 +6,9 @@ from service.endpoints import features, probes
 
 
 @pytest.fixture()
-def call_endpoint(client):
+def call_scraper(client):
     def handler(message: dict):
-        response = client.post("/feature", json=message)
-        response.raise_for_status()
+        response = client.post("/scraper", json=message)
         return response
 
     return handler
