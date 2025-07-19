@@ -1,6 +1,8 @@
-from pydantic import BaseModel, Field
+import base64
+import json
+from pydantic import BaseModel, BeforeValidator, Field
 from datetime import datetime
-from typing import Literal
+from typing import Annotated, Literal
 
 
 class Payload(BaseModel):
@@ -8,4 +10,20 @@ class Payload(BaseModel):
     domain: Literal["youtube"] = Field(
         description="The domains that have been enabled for the scraper"
     )
-    timestamp: datetime
+
+
+def _pubsub_payload_to_dict(payload: str) -> dict:
+    decoded = base64.b64decode(payload.encode()).decode()
+    return json.loads(decoded)
+
+
+class PubSubEnvelope(BaseModel):
+    data: Annotated[Payload, BeforeValidator(_pubsub_payload_to_dict)]
+    messageId: str
+    publishTime: datetime
+
+
+class PubSubSubscriptionEnvelope(BaseModel):
+    message: PubSubEnvelope
+    subscription: str
+    deliveryAttempt: int

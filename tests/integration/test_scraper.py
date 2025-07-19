@@ -1,11 +1,11 @@
 import uuid
-from fastapi.encoders import jsonable_encoder
 from datetime import datetime
 
 
 from service.models import models
-from service.models.api import Payload
 from unittest import mock
+
+from tests.integration.conftest import create_pubsub_envelope
 
 
 @mock.patch("service.logic.youtube.scrape_youtube")
@@ -20,11 +20,10 @@ def test_example_style_of_integration_test(mock_scrape_youtube, call_scraper):
             posted_timestamp=datetime.now(),
         )
     ]
-    payload = jsonable_encoder(
-        Payload(url="example.com", domain="youtube", timestamp=datetime.now())
-    )
 
-    response = call_scraper(payload)
+    payload = {"url": "example.com", "domain": "youtube"}
+    envelope = create_pubsub_envelope(payload)
+    response = call_scraper(envelope)
     assert response.status_code == 200
     assert (
         response.text == "Comments have been scraped and analyzed for url='example.com'"
@@ -35,7 +34,6 @@ def test_unconfigured_domain_raises_error(call_scraper):
     payload = {
         "url": "https://www.youtube.com/",
         "domain": "random_domain",
-        "timestamp": str(datetime.now()),
     }
-    response = call_scraper(payload)
+    response = call_scraper(create_pubsub_envelope(payload))
     assert response.status_code == 422
