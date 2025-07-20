@@ -24,6 +24,7 @@ class PubSubEnvelope(BaseModel):
 
 
 class PubSubSubscriptionEnvelope(BaseModel):
+    # The class can be found in the docs here: https://cloud.google.com/pubsub/docs/push#receive_push
     message: PubSubEnvelope
     subscription: str
     deliveryAttempt: int
