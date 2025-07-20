@@ -9,6 +9,8 @@ The scraper and saving to the database is yet to be set-up.
 
 ## Installation
 
+Please copy the .env-example and .envrc-example files and remove -example. The use of [direnv](https://direnv.net/) for the .envrc files is recommended
+
 ### Local
 1. Install UV via the [docs](https://docs.astral.sh/uv/getting-started/installation/).
 2. Check UV is installed by running 
