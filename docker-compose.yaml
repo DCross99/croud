@@ -1,0 +1,15 @@
+services:
+  croud-api:
+    build:
+      target: dev
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: croud-api
+    ports:
+      - 8080:8080
+    environment:
+      PORT: 8080
+    volumes:
+      - ./service:/build/service
+      - ./uv.lock:/build/uv.lock
+      - ./pyproject.toml:/build/pyproject.toml
