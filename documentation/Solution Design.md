@@ -98,3 +98,26 @@ MVP:
 ## Monitoring & Observability
 
 Easily setup via TF. We want this done before go-live as it means we can track adoption and identify potential bugs etc
+
+
+## Scalability
+
+By utilising Cloud Run services increasing scalability would be incredibly simple. The tool would require the initial users request id to be stored in the frontend UI. Which would be okay for an initial release, however on refresh this id could be lost and the user would not be able to download.
+
+Due to the way the IAP/Brand would be setup we could easily add the functionality of listing a selection of requests (last 5 etc) that the user has made irrelevant of refreshing pages. 
+
+
+## CI/CD
+
+As we are deploying Cloud Run services I would strive to use cloud build to deploy our services to the GCP project.
+
+
+## Feedback & talking points for the interview:
+
+1. Sarcasm & Emojis in comments
+2. Utilising different models, switching out the model is incredibly easy, would like to spend more time researching to find an optimum model.
+3. Optimisations to the service, potential pitfalls e.g. location of loading the model, should likely be done via the lifespan of the service. 
+4. DB -> assuming the account managers don't have technical ability would alter the way I would recommend storing the data.
+5. Some sites e.g. YouTube have likes/dislike counts on the comments, this should be utilised in the analysis.
+
+I would generally be comfortable with the majority of this project, especially the scraper & API service. I would want support on the frontend UI which I would look for in the other engineers, as well as getting feedback from the users for how they want the page to look. I would also want other engineers opinions on which models to use, a poor choice in model would quickly make this project redundant.

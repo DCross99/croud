@@ -48,6 +48,15 @@ docker compose up
 docker exec croud-api uv run pytest tests
 ```
 
+## Toolchain
+
+This project has been setup to use py3.12 and [uv](https://docs.astral.sh/uv/) which is a python package and project manager, written in Rust, brought to you by the creators of the best linting tools - [ruff](https://docs.astral.sh/ruff/).
+
+The pipelines will run a selection of linters/type checkers which are not exhaustive:
+* ruff
+* pyright
+
+These are run via pre-commit to ensure strong pythonic practices.
 
 ## Gotchas
 
