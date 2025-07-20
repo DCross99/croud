@@ -1,8 +1,0 @@
-POST http://localhost:8080/sentiment_analyzer HTTP/1.1
-content-type: application/json
-
-{
-    "id": 123,
-    "timestamp": "2025-01-01T23:59:59Z",
-    "sentence_to_analyze": "Oh wow this is a test file for me to analyze. I hope I am happy!"
-}
